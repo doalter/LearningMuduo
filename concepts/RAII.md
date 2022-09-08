@@ -69,4 +69,4 @@ boo()
 ```
 In the function boo(), we initialize ``lock`` which meanwhile get the mutex and lock it. When we leave the boo function, the destructor automatically unlock the mutex. This is useful when there is an exception in ``do sth`` and returns. The destructor will always call the unlock no matter where and when the function returns.
 
-Actually, class MutexLock is also an example of RAII. It creates the mutex by constructor and destroy it by destructor. If an object holds the mutex releases, then the mutex is destroyed automatically.
+Actually, class MutexLock is also an example of RAII. It creates the mutex by constructor and destroy it by destructor. If an object who holds the mutex releases, then the mutex is destroyed automatically.
