@@ -32,7 +32,7 @@ shared_ptr/weak_ptr solved the problem that we can destruct an object safely, be
 
 But the thread safty problem still exists when multiple threads read/write a shared_ptr pointed object simultaneously, and here we can use mutex safely.
 
-Note that shared_ptr itself is not a thread_safe object as it is just a normal object which has two members(pointer and count), which means shared_ptr needs be procted by mutex in multi-threads.
+Note that shared_ptr itself is not a thread_safe object as it is just a normal object which has two members(pointer and count), which means shared_ptr needs to be procted by mutex in multi-threads.
 
 We can do it this way:
 ```C++
@@ -45,7 +45,7 @@ void read()
         MutexLockGuard lock(mutex);
         localPtr = globalPtr;
     }
-    doRead(localPtr); //doRead and doWrite also needs a mutex to protect the data pointed by ptr
+    doRead(localPtr); //doRead and doWrite also need a mutex to protect the data pointed by ptr
 }
 
 void write()
@@ -55,6 +55,6 @@ void write()
         MutexLockGuard lock(mutex);
         globalPtr = newPtr;
     }
-    doWrite(newPtr); //doRead and doWrite also needs a mutex to protect the data pointed by ptr
+    doWrite(newPtr); //doRead and doWrite also need a mutex to protect the data pointed by ptr
 }
 ```
